@@ -1,0 +1,187 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Perfil de auditor e usuário do sistema 5S UAA",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "nome": { "type": "string" },
+        "email": { "type": "string" },
+        "matricula": { "type": "string" },
+        "cargo": { "type": "string" },
+        "setor_origem": { "type": "string" },
+        "role": { "type": "string", "enum": ["auditor", "supervisor", "coordenador", "admin"] },
+        "criado_em": { "type": "string" }
+      },
+      "required": ["uid", "nome"]
+    },
+    "Sector": {
+      "title": "Sector",
+      "description": "Setor industrial ou administrativo da unidade UAA Nova Marilândia",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nome": { "type": "string" },
+        "area": { "type": "string" },
+        "responsavel_nome": { "type": "string" },
+        "responsavel_cargo": { "type": "string" },
+        "responsavel_email": { "type": "string" },
+        "responsaveis": { "type": "array" },
+        "meta_5s": { "type": "number" },
+        "turno_ativo": { "type": "string" },
+        "ultima_auditoria": { "type": "string" },
+        "ultima_nota": { "type": "number" }
+      },
+      "required": ["id", "nome", "area", "meta_5s"]
+    },
+    "Audit": {
+      "title": "Audit",
+      "description": "Registro oficial de auditoria dos 5 Sensos realizada no setor",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "codigo": { "type": "string" },
+        "setor_id": { "type": "string" },
+        "setor_nome": { "type": "string" },
+        "auditor_id": { "type": "string" },
+        "auditor_nome": { "type": "string" },
+        "auditor_matricula": { "type": "string" },
+        "supervisor_acompanhante": { "type": "string" },
+        "data": { "type": "string" },
+        "hora": { "type": "string" },
+        "turno": { "type": "string" },
+        "ciclo": { "type": "string" },
+        "respostas": { "type": "array" },
+        "nota_final": { "type": "number" },
+        "percentual_atingido": { "type": "number" },
+        "status_conformidade": { "type": "string" },
+        "observacoes_gerais": { "type": "string" },
+        "total_conformes": { "type": "number" },
+        "total_inconformes": { "type": "number" }
+      },
+      "required": ["id", "codigo", "setor_id", "data", "nota_final"]
+    },
+    "ActionPlan": {
+      "title": "ActionPlan",
+      "description": "Plano de ação corretiva 5W2H gerado para inconformidades",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "codigo": { "type": "string" },
+        "auditoria_id": { "type": "string" },
+        "auditoria_codigo": { "type": "string" },
+        "setor_id": { "type": "string" },
+        "setor_nome": { "type": "string" },
+        "supervisor_responsavel": { "type": "string" },
+        "senso": { "type": "string" },
+        "criterio_id": { "type": "string" },
+        "criterio_numero": { "type": "number" },
+        "descricao_problema": { "type": "string" },
+        "o_que_fazer": { "type": "string" },
+        "por_que_fazer": { "type": "string" },
+        "onde_fazer": { "type": "string" },
+        "quem_fara": { "type": "string" },
+        "como_fazer": { "type": "string" },
+        "prazo_limite": { "type": "string" },
+        "data_criacao": { "type": "string" },
+        "data_conclusao": { "type": "string" },
+        "status": { "type": "string" },
+        "foto_antes": { "type": "string" },
+        "foto_depois": { "type": "string" },
+        "observacoes": { "type": "string" },
+        "ciclo": { "type": "string" }
+      },
+      "required": ["id", "codigo", "setor_id", "status"]
+    },
+    "ScheduledAudit": {
+      "title": "ScheduledAudit",
+      "description": "Agendamento de auditoria no calendário mensal com auditor designado",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "setor_id": { "type": "string" },
+        "setor_nome": { "type": "string" },
+        "auditor_id": { "type": "string" },
+        "auditor_nome": { "type": "string" },
+        "data_sugerida": { "type": "string" },
+        "ciclo": { "type": "string" },
+        "turno": { "type": "string" },
+        "status": { "type": "string" },
+        "data_execucao": { "type": "string" },
+        "auditoria_id": { "type": "string" },
+        "observacoes": { "type": "string" }
+      },
+      "required": ["id", "setor_id", "auditor_id", "data_sugerida", "status"]
+    },
+    "SectorPhoto": {
+      "title": "SectorPhoto",
+      "description": "Registro fotográfico ou evidência 5S catalogada por setor e mês",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "setor_id": { "type": "string" },
+        "setor_nome": { "type": "string" },
+        "mes": { "type": "string" },
+        "ciclo": { "type": "string" },
+        "data": { "type": "string" },
+        "foto_url": { "type": "string" },
+        "titulo": { "type": "string" },
+        "descricao": { "type": "string" },
+        "senso": { "type": "string" },
+        "tipo": { "type": "string" },
+        "auditoria_id": { "type": "string" },
+        "auditoria_codigo": { "type": "string" },
+        "auditor_nome": { "type": "string" },
+        "supervisor_nome": { "type": "string" }
+      },
+      "required": ["id", "setor_id", "foto_url"]
+    },
+    "ChecklistQuestion": {
+      "title": "ChecklistQuestion",
+      "description": "Critério de avaliação parametrizado para os 5 Sensos",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "senso": { "type": "string" },
+        "numero": { "type": "number" },
+        "titulo": { "type": "string" },
+        "descricao_criterio": { "type": "string" },
+        "padrao_esperado": { "type": "string" },
+        "peso": { "type": "number" },
+        "ativo": { "type": "boolean" }
+      },
+      "required": ["id", "senso", "numero", "titulo"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Usuários e auditores cadastrados"
+    },
+    "/sectors/{sectorId}": {
+      "schema": "Sector",
+      "description": "Setores da fábrica UAA"
+    },
+    "/audits/{auditId}": {
+      "schema": "Audit",
+      "description": "Auditorias 5S realizadas"
+    },
+    "/actionPlans/{planId}": {
+      "schema": "ActionPlan",
+      "description": "Planos de ação 5W2H"
+    },
+    "/scheduledAudits/{scheduleId}": {
+      "schema": "ScheduledAudit",
+      "description": "Agendamentos mensais de auditorias"
+    },
+    "/sectorPhotos/{photoId}": {
+      "schema": "SectorPhoto",
+      "description": "Galeria de fotos 5S por setor"
+    },
+    "/checklistQuestions/{questionId}": {
+      "schema": "ChecklistQuestion",
+      "description": "Critérios oficiais do checklist 5S"
+    }
+  }
+}

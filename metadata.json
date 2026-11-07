@@ -1,0 +1,6 @@
+{
+  "name": "Programa 5S UAA - Nova Marilândia",
+  "description": "Sistema integrado de auditorias, checklists dos 5 Sensos, rankings setoriais, planos de ação 5W2H e indicadores de excelência da União Avícola.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

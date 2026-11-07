@@ -1,0 +1,62 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128;
+    }
+
+    // Users & Auditors collection
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if isValidId(userId);
+    }
+
+    // Sectors collection
+    match /sectors/{sectorId} {
+      allow read: if true;
+      allow create, update: if isValidId(sectorId);
+      allow delete: if isValidId(sectorId);
+    }
+
+    // Audits collection
+    match /audits/{auditId} {
+      allow read: if true;
+      allow create, update: if isValidId(auditId);
+      allow delete: if isValidId(auditId);
+    }
+
+    // Action Plans (5W2H) collection
+    match /actionPlans/{planId} {
+      allow read: if true;
+      allow create, update: if isValidId(planId);
+      allow delete: if isValidId(planId);
+    }
+
+    // Scheduled Audits collection
+    match /scheduledAudits/{scheduleId} {
+      allow read: if true;
+      allow create, update: if isValidId(scheduleId);
+      allow delete: if isValidId(scheduleId);
+    }
+
+    // Sector Photos collection
+    match /sectorPhotos/{photoId} {
+      allow read: if true;
+      allow create, update: if isValidId(photoId);
+      allow delete: if isValidId(photoId);
+    }
+
+    // Checklist Questions collection
+    match /checklistQuestions/{questionId} {
+      allow read: if true;
+      allow create, update: if isValidId(questionId);
+      allow delete: if isValidId(questionId);
+    }
+  }
+}
